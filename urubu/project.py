@@ -151,7 +151,7 @@ class Project(object):
 
     def get_contentinfo(self):
         """Get info from the markdown content files."""
-        pattern = '*.md'
+        pattern = '[!_]*.md'
         ignore_patterns = self.get_ignore_patterns()
         for path, dirnames, filenames in os.walk(self.cwd):
             relpath = get_relpath(path, self.cwd)
