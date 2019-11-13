@@ -164,7 +164,7 @@ class Project(object):
                     # normalize to convert ./foo into foo
                     # to avoid problems with ignore_patterns matching
                     relfn = os.path.normpath(os.path.join(relpath, fn))
-                    if any(fnmatch.fnmatch(os.path.basename(relfn, ip))
+                    if any(fnmatch.fnmatch(os.path.basename(relfn), ip)
                            for ip in ignore_patterns):
                         continue
                     meta = readers.get_yamlfm(relfn)
