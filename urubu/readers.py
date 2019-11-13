@@ -21,19 +21,12 @@ from io import open
 
 import yaml
 import re
-import codecs
-import warnings
-
-from urubu import UrubuWarning
-
-yamlfm_warning = 'No yaml frontmatter found in {}'
 
 def get_yamlfm(fn):
     """Return the yaml frontmatter."""
     info = _get_yamlfm_helper(fn)
-    if info is None:
-        warnings.warn(yamlfm_warning.format(fn), UrubuWarning)
     return info
+
 
 def _get_yamlfm_helper(fn):
     with open(fn, 'r', encoding='utf-8-sig') as f:
@@ -53,12 +46,6 @@ def _get_yamlfm_helper(fn):
                 else:
                     return None
             else:
-               lines.append(line)
+                lines.append(line)
 
-def get_yaml_navinfo(fn):
-    """Read yaml navigation info."""
-    with open(fn, 'r', encoding='utf-8-sig') as f:
-        s = f.read()
-        info = yaml.safe_load(s)
-        return info
-        
+

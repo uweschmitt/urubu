@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- customizations -->
     <link href="/css/site.css" rel="stylesheet" media="screen">
+    <!-- pygments -->
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
+    <!-- icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,6 +30,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -43,27 +49,25 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
- 
-            <li><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li><a href="/start.html">Overview</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/support.html">Support</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+                <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/more/" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>    
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>    
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>    
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+                <li><a href="https://github.com/jandecaluwe/urubu">GitHub repository</a></li>
+                <li><a href="/more/sites.html">Websites powered by Urubu</a></li>
+                <li><a href="/more/about.html">About this site</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -72,42 +76,54 @@
 
 
 <div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7">
-                <h1>Manual</h1>
-                <p></p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+       <div class="col-md-7">
+         <h1>Manual</h1>
+         <p></p>
     </div>
+  </div>
+ </div>
 </div>
 
 <div class="container">
+  <div class="row">
 
-    <div class="row">
-
-        <div class="col-md-7" role="main">
-                <h4><a href="/manual/intro.html">Concepts</a></h4>
-                <p></p>
-                <h4><a href="/manual/structure.html">Project structure</a></h4>
-                <p></p>
-                <h4><a href="/manual/authoring.html">Authoring</a></h4>
-                <p></p>
-                <h4><a href="/manual/building.html">Project building</a></h4>
-                <p></p>
-                <h4><a href="/manual/templating.html">Templating</a></h4>
-                <p></p>
-        </div>
-
+    <div class="col-md-7" role="main">
+    <main>
+      <h4><a href="/manual/intro.html">Concepts</a></h4>
+        <p></p>
+      <h4><a href="/manual/install.html">Installation</a></h4>
+        <p></p>
+      <h4><a href="/manual/structure.html">Project structure</a></h4>
+        <p></p>
+      <h4><a href="/manual/authoring.html">Authoring</a></h4>
+        <p></p>
+      <h4><a href="/manual/building.html">Project building</a></h4>
+        <p></p>
+      <h4><a href="/manual/templates.html">Templates</a></h4>
+        <p></p>
+      <h4><a href="/manual/templating-in-pages.html">Templating constructs in pages</a></h4>
+        <p></p>
+      <h4><a href="/manual/hooks.html">Python hooks</a></h4>
+        <p></p>
+      <h4><a href="/manual/extensions.html">Markdown extensions</a></h4>
+        <p></p>
+      <h4><a href="/manual/search.html">Adding Search</a></h4>
+        <p></p>
+    </main>
     </div>
 
+ </div>
 </div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

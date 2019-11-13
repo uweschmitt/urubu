@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- customizations -->
     <link href="/css/site.css" rel="stylesheet" media="screen">
+    <!-- pygments -->
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
+    <!-- icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,6 +30,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -43,27 +49,25 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
- 
-            <li><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li><a href="/start.html">Overview</a></li>
             <li><a href="/manual/">Manual</a></li>
+            <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/support.html">Support</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+                <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/more/" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>    
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>    
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>    
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+                <li><a href="https://github.com/jandecaluwe/urubu">GitHub repository</a></li>
+                <li><a href="/more/sites.html">Websites powered by Urubu</a></li>
+                <li><a href="/more/about.html">About this site</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -76,48 +80,170 @@
     <div class="row">
 
         <div class="col-md-8 role="main">
-                <div class="page-header">
-                  <h1>25-May-2014&nbsp;&nbsp;Urubu 0.4 and Urubu Quickstart released</h1>
+                <div> 
+                  <h3>14-Nov-2016&nbsp;&nbsp;Urubu 1.3.0 released</h3>
                 </div>
-                <div class="lead">
+                <div>
+                    <p>Highlights:</p>
+<ul>
+<li>
+<p>Add posibility to override output filename. (#51). See the <code>saveas</code> attribute
+in the <a href="/manual/structure.html#content-files" title="Project structure">manual</a>.
+An example usage, see <a href="/faq/sitemap.html" title="How do I make a sitemap?">How do I make a sitemap?</a>.</p>
+</li>
+<li>
+<p>The <code>urubu serve</code> command is more secure.  This is transparent to the user
+(#49).</p>
+</li>
+<li>
+<p>Added option for jinja2 to fail on undefined vars (#47). 
+See the <code>strict_undefined</code> attribute in the <a href="/manual/structure.html#_siteyml" title="Project structure">manual</a>.</p>
+</li>
+</ul>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>12-Feb-2016&nbsp;&nbsp;Urubu 1.2.0 released</h3>
+                </div>
+                <div>
+                    <p>The highlight of this release is support for <a href="/manual/templating-in-pages.html" title="Templating constructs in pages">Templating constructs in pages</a>.</p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>10-Jan-2016&nbsp;&nbsp;Urubu 1.1.0 released</h3>
+                </div>
+                <div>
+                    <p>This release adds experimental support for the <code>&lt;mark</code>&gt; tag.</p>
+<p>Read more in the manual: <a href="/manual/extensions.html#support-for-the-mark-tag" title="Markdown extensions">Support for the mark tag</a>
+and in <a href="http://www.jandecaluwe.com/blog/mark-tag-support.html">this blog post</a>.</p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>01-Jan-2016&nbsp;&nbsp;Urubu 1.0.0 released</h3>
+                </div>
+                <div>
+                    <p>This release adds support for the <code>process_info</code> Python hook.  This hook
+provides a powerful way to assist in templating. Basically, it provides full
+Python power to inspect, verify, modify, and add page attributes. For example,
+you can use it to define a default <code>layout</code>, or a specific <code>layout</code> 
+for pages in a certain directory.</p>
+<p>Read more in the manual: <a href="/manual/hooks.html#the-process_info-hook" title="Python hooks">The process_info hook</a>.</p>
+<p>There is also a new <code>keep_files</code> configuration attribute, that lets you
+preserve files that would otherwise be ignored.  See the
+<a href="/manual/structure.html#_siteyml" title="Project structure">documentation</a>.</p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>15-Dec-2015&nbsp;&nbsp;Urubu 0.9.0 released</h3>
+                </div>
+                <div>
+                    <p>This release adds support for Tipue Search, an open source search solution
+based on Javascript in the browser.</p>
+<p>Read more in the chapter <a href="/manual/search.html" title="Adding Search">Adding Search</a> in the manual.</p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>22-Nov-2015&nbsp;&nbsp;Urubu 0.8 released</h3>
+                </div>
+                <div>
+                    <p>Release highlights:</p>
+<ul>
+<li>
+<p>the <code>urubu</code> serve command automatically takes
+the <code>baseurl</code> option into account (Pull request #27).</p>
+</li>
+<li>
+<p>when an undefined anchor is referred to in a page, a
+warning is generated, just like for references to undefined pages (Issue #30).</p>
+</li>
+<li>
+<p>the <code>layout</code> attribute can be assigned <code>null</code>. In this
+way the page content can be used by other pages, but no html is generated for
+the page itself.</p>
+</li>
+</ul>
+<p>In addition, a significant effort was put into development robustness. In
+particular, a regression test suite has been added. This is based on <code>py.test</code>
+and <code>tox</code>, so that both Python 2.7 and 3.4 are verified. </p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>07-Mar-2015&nbsp;&nbsp;Urubu 0.7: Python 3 support, baseurl option</h3>
+                </div>
+                <div>
+                    <p>Urubu 0.7 adds features that make it more flexible to use. </p>
+<p>First, the release adds Python 3 support, from a single codebase.
+You can use Python 2.7 or Python 3.4.</p>
+<p>Second, there is now a <code>baseurl</code> option to add a prefix to generated local
+URLs. <a href="/manual/structure.html#_siteyml" title="Project structure">More info&nbsp;&raquo;</a>.</p>
+<p>On the other hand, the checklist extension has been removed as it caused issues
+with reference id resolution.</p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>28-Jan-2015&nbsp;&nbsp;Urubu 0.6 released</h3>
+                </div>
+                <div>
+                    <p>Urubu 0.6 improves on wiki links: now you can link to a location within a page. </p>
+<p>Read <a href="http://www.jandecaluwe.com/blog/urubu-0-6.html">my blog post</a> for more info.</p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>08-Sep-2014&nbsp;&nbsp;Urubu 0.5 released</h3>
+                </div>
+                <div>
+                    <p>Urubu 0.5 introduces tag support. </p>
+<p>Read <a href="http://www.jandecaluwe.com/blog/tag_support_urubu.html">my blog post</a> for an introduction.</p>
+                    <hr>
+                </div>
+                <div> 
+                  <h3>25-May-2014&nbsp;&nbsp;Urubu 0.4 and Urubu Quickstart released</h3>
+                </div>
+                <div>
                     <p>Release features: </p>
 <ul>
 <li>Run <code>urubu serve</code> from the top-level project directory. </li>
 <li><a href="/manual/structure.html" title="Project structure">Programmable file extensions</a> for site pages</li>
 <li>Introducing <a href="http://urubu-quickstart.jandecaluwe.com" title="Urubu Quickstart">Urubu Quickstart</a>: a quick way to set up a new Urubu project.</li>
 </ul>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>18-Mar-2014&nbsp;&nbsp;Urubu 0.3.1 released</h1>
+                <div> 
+                  <h3>18-Mar-2014&nbsp;&nbsp;Urubu 0.3.1 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This is a bug-fix release.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>27-Feb-2014&nbsp;&nbsp;Urubu 0.3 released</h1>
+                <div> 
+                  <h3>27-Feb-2014&nbsp;&nbsp;Urubu 0.3 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This release adds markdown support for front-matter attributes.
 <a href="/manual/structure.html#markdown-in-attributes">Read more&nbsp;&raquo;</a></p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>15-Feb-2014&nbsp;&nbsp;Urubu 0.2.1 released</h1>
+                <div> 
+                  <h3>15-Feb-2014&nbsp;&nbsp;Urubu 0.2.1 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This is a bug fix release.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>22-Jan-2014&nbsp;&nbsp;Urubu 0.2 released</h1>
+                <div> 
+                  <h3>22-Jan-2014&nbsp;&nbsp;Urubu 0.2 released</h3>
                 </div>
-                <div class="lead">
+                <div>
                     <p>This release adds support for github-style task lists.</p>
+                    <hr>
                 </div>
-                <div class="page-header">
-                  <h1>12-Jan-2014&nbsp;&nbsp;Urubu 0.1 released</h1>
+                <div> 
+                  <h3>12-Jan-2014&nbsp;&nbsp;Urubu 0.1 released</h3>
                 </div>
-                <div class="lead">
-                    <p>Introducing Urubu, a Python-based micro <abbr title="Content Management System">CMS</abbr> for static websites.
+                <div>
+                    <p>Introducing Urubu, a Python-based micro CMS for static websites.
 Read about <a href="http://www.jandecaluwe.com/blog/i-dont-like-blogs.html">the rationale behind it</a>.</p>
+                    <hr>
                 </div>
         </div>
 
@@ -155,9 +281,11 @@ window.__gcfg = {
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Read me first</title>
+    <title>Overview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- customizations -->
     <link href="/css/site.css" rel="stylesheet" media="screen">
+    <!-- pygments -->
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
+    <!-- icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,6 +30,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -43,27 +49,25 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
- 
-            <li class="active"><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li class="active"><a href="/start.html">Overview</a></li>
             <li><a href="/manual/">Manual</a></li>
+            <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/support.html">Support</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+                <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/more/" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>    
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>    
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>    
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+                <li><a href="https://github.com/jandecaluwe/urubu">GitHub repository</a></li>
+                <li><a href="/more/sites.html">Websites powered by Urubu</a></li>
+                <li><a href="/more/about.html">About this site</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -75,40 +79,20 @@
 
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-      <li class="active">Read me first</li>
+      <li class="active">Overview</li>
   </ol>
 
   <div class="page-header">
- 
-    <h1>Read me first</h1>
+    <h1>Overview</h1>
   </div>
 
   <div class="row">
 
-    <div class="col-md-3" role="navigation"> 
- 
-      <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
-        <div class="well">
-          <a href="#"><strong>Read me first</strong></a>
-          <div class="toc">
-<ul>
-<li><a href="#what-is-urubu">What is Urubu?</a></li>
-<li><a href="#static-versus-dynamic">Static versus dynamic</a></li>
-<li><a href="#why-a-tool">Why a tool?</a></li>
-<li><a href="#why-urubu">Why Urubu?</a></li>
-<li><a href="#urubus-ideal-use-case">Urubu's ideal use case</a></li>
-</ul>
-</div>
-
-        </div>
-      </div>
-    </div>
- 
-    <div class="content">
-      <div class="col-md-6" role="main">
-        <h2 id="what-is-urubu">What is Urubu?</h2>
-<p>Urubu is a tool to build static websites. The following sections will help you
-to decide whether it is the right tool for you.</p>
+    <div class="col-md-6 content" role="main">
+    <main>
+      <h2 id="what-is-urubu">What is Urubu?</h2>
+<p>Urubu is <mark>a tool to build static websites</mark>. The following sections will help
+you to decide whether it is the right tool for you.</p>
 <h2 id="static-versus-dynamic">Static versus dynamic</h2>
 <p>A static website is the simple case. It consists of a set of fixed pages. The
 only job of the web server is to serve the page that you request.</p>
@@ -136,19 +120,18 @@ info manually is error prone and time consuming. In Urubu, you use templates
 (also known as layouts) instead. They make it easy to define the common html
 structure of a set of similar pages. </p>
 <h2 id="why-urubu">Why Urubu?</h2>
-<p>There is no shortage of static web site generators, including
-a lot of <a href="https://wiki.python.org/moin/PythonBlogSoftware#Static">Python solutions</a>.   </p>
-<p>However, these tools are typically blog oriented. If you think of your website
-primarily as blog, with content in reverse chronological order and with good
-support for tagging and archiving, there are probably better solutions than
-Urubu.</p>
-<p>On the other hand, if you think of your website as set of logically connected
-content pages, Urubu may be a good choice. Urubu makes it it easy to define a good
-navigation structure, so that a user is never "lost". This is especially
+<p>There is no shortage of static web site generators, including a lot of <a href="https://wiki.python.org/moin/PythonBlogSoftware#Static">Python
+solutions</a>.   However, these tools are typically blog oriented. If
+your website is primarily a blog, with content in reverse chronological order
+and with good support for tagging and archiving, there are many other solutions
+than Urubu.</p>
+<p>On the other hand, <mark>if you view your website as a set of logically connected
+content pages, Urubu is an excellent choice</mark>. Urubu makes it it easy to define
+a good navigation structure, so that a user is never "lost". This is especially
 important for technical content.</p>
-<p>Of course, it is possible to include a simple blog in an Urubu site.
-Within a folder, you can specify how the content should be ordered using
-an arbitrary key. For a blog, this would be reverse order by date.</p>
+<p>Of course, you can also include a blog in an Urubu site.  Within a folder, you
+can specify how the content should be ordered using an arbitrary key. For a
+blog, this would be reverse order by date.</p>
 <h2 id="urubus-ideal-use-case">Urubu's ideal use case</h2>
 <p>If you would like to develop a website like a software project, you will feel
 at home with Urubu. For example, you can maintain an Urubu site in a git or
@@ -156,14 +139,33 @@ mercurial repository and use the workflows that these systems enable.  For
 example, you can collaborate on <a href="http://www.github.com" title="GitHub">GitHub</a> or <a href="http://www.bitbucket.com" title="Bitbucket">Bitbucket</a> through <a href="https://help.github.com/articles/using-pull-requests">pull
 requests</a>. Also, deployment can be as straightforward as pushing to an upstream
 repository. </p>
-      </div>
+    </main>
+    <ul class="pager">
+      <li class="next"><a href="/manual/">Manual &rarr;</a></li>
+    </ul>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Overview</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#what-is-urubu">What is Urubu?</a></li>
+<li><a href="#static-versus-dynamic">Static versus dynamic</a></li>
+<li><a href="#why-a-tool">Why a tool?</a></li>
+<li><a href="#why-urubu">Why Urubu?</a></li>
+<li><a href="#urubus-ideal-use-case">Urubu's ideal use case</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
     </div>
 
   </div>
-    
-  <ul class="pager">
-    <li class="next"><a href="/install.html">Installation &rarr;</a></li>
-  </ul>
 
     <div class="footer">
         <div style="margin: 5px">
@@ -193,13 +195,15 @@ window.__gcfg = {
     </div>
 
 
-</div> 
+</div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

@@ -3,9 +3,14 @@ title: Manual
 layout: index
 content:
     - intro 
+    - install
     - structure
     - authoring
     - building
-    - templating
+    - templates
+    - templating-in-pages
+    - hooks
+    - extensions
+    - search
 ---
 

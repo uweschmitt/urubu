@@ -1,6 +1,7 @@
 from setuptools import setup
 
-requires = ['jinja2 >= 2.7', 'pygments', 'markdown', 'markdown-checklist', 'pyyaml']
+requires = ['jinja2 >= 2.7', 'pygments',
+            'markdown >= 2.6', 'pyyaml', 'beautifulsoup4']
 
 entry_points = {
     'console_scripts': [
@@ -10,7 +11,7 @@ entry_points = {
 
 setup(
     name="urubu",
-    version="0.4",
+    version="1.3.1",
     url='http://urubu.jandecaluwe.com',
     author='Jan Decaluwe',
     author_email='jan@jandecaluwe.com',

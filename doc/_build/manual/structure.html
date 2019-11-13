@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- customizations -->
     <link href="/css/site.css" rel="stylesheet" media="screen">
+    <!-- pygments -->
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
+    <!-- icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,6 +30,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -43,27 +49,25 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
- 
-            <li><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li><a href="/start.html">Overview</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/support.html">Support</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+                <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/more/" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>    
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>    
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>    
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+                <li><a href="https://github.com/jandecaluwe/urubu">GitHub repository</a></li>
+                <li><a href="/more/sites.html">Websites powered by Urubu</a></li>
+                <li><a href="/more/about.html">About this site</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -80,43 +84,16 @@
   </ol>
 
   <div class="page-header">
- 
     <h1>Project structure</h1>
   </div>
 
   <div class="row">
 
-    <div class="col-md-3" role="navigation"> 
- 
-      <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
-        <div class="well">
-          <a href="#"><strong>Project structure</strong></a>
-          <div class="toc">
-<ul>
-<li><a href="#the-project-directory">The project directory</a></li>
-<li><a href="#processing-rules">Processing rules</a></li>
-<li><a href="#special-files">Special files</a><ul>
-<li><a href="#_siteyml">_site.yml</a></li>
-<li><a href="#_layouts">_layouts</a></li>
-<li><a href="#_python">_python</a></li>
-</ul>
-</li>
-<li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
-<li><a href="#content-files">Content files</a></li>
-<li><a href="#markdown-in-attributes">Markdown in attributes</a></li>
-<li><a href="#index-files">Index files</a></li>
-</ul>
-</div>
-
-        </div>
-      </div>
-    </div>
- 
-    <div class="content">
-      <div class="col-md-6" role="main">
-        <h2 id="the-project-directory">The project directory</h2>
+    <div class="col-md-6 content" role="main">
+    <main>
+      <h2 id="the-project-directory">The project directory</h2>
 <p>A typical Urubu project directory looks as follows:</p>
-<div class="codehilite"><pre>Makefile
+<div class="codehilite"><pre><span></span>Makefile
 _site.yml
 _layouts/_base.html
          page.html
@@ -140,7 +117,7 @@ folder2/index.md
 
 <p>Files and directories with pathnames starting with an underscore <code>_</code> are
 special. They are used during processing, but excluded from the built website.
-Their function will be discussed below.  </p>
+Their function will be discussed below.</p>
 <p>The <code>css</code> and <code>js</code> directories are just an example of how CSS style sheets and
 javascript files could be organized. You can use any organization that you
 prefer.</p>
@@ -152,21 +129,29 @@ directory should have an <code>index.md</code> file, including the top-level dir
 directory, and putting the result in a <code>_build</code> subdirectory. The processing
 depends on the pathname as follows:</p>
 <ul>
-<li>a <code>Makefile</code> is not copied to the build. </li>
-<li>files and directories starting with a
-dot <code>.</code> or underscore <code>_</code> are not copied to the build.</li>
-<li>Markdown files with extension <code>.md</code> are converted to a
-html file that is put into the build in the same relative location.</li>
-<li>all other files and directories are copied unmodified to the build in the
-same relative location.</li>
+<li>
+<p>a <code>Makefile</code> is ignored and not copied to the build.</p>
+</li>
+<li>
+<p>files and directories starting with a dot <code>.</code> or
+underscore <code>_</code> are ignored and not copied to the build.</p>
+</li>
+<li>
+<p>Markdown files with extension <code>.md</code> are converted to a
+html file that is put into the build in the same relative location.</p>
+</li>
+<li>
+<p>all other files and directories are copied unmodified to the build in the
+same relative location.</p>
+</li>
 </ul>
-<p>As a result of the project organization and the build process, the
-structure of the build matches the structure of the project directory.
-The relative location of all files is thus preserved.</p>
-<h2 id="special-files">Special files</h2>
+<p>As a result of the project organization and the build process, the structure of
+the build matches the structure of the project directory.  The relative
+location of all files is thus preserved.</p>
+<h2 id="special-files-and-directories">Special files and directories</h2>
 <h3 id="_siteyml"><code>_site.yml</code></h3>
 <p>This file contains site configuration info in YAML format.
-Currently, these are the predefined attributes: </p>
+Currently, these are the predefined attributes:</p>
 <table class="table">
 <thead>
 <tr>
@@ -180,6 +165,10 @@ Currently, these are the predefined attributes: </p>
 <td>Holds a mapping from reference ids to link objects.</td>
 </tr>
 <tr>
+<td><code>baseurl</code></td>
+<td>Prefix for generated local URLs</td>
+</tr>
+<tr>
 <td><code>file_ext</code></td>
 <td>Change default file extension (<code>'.html'</code>) for processed <code>.md</code> files</td>
 </tr>
@@ -187,10 +176,33 @@ Currently, these are the predefined attributes: </p>
 <td><code>link_ext</code></td>
 <td>Change default file extension (<code>'.html'</code>) for links to site's pages</td>
 </tr>
+<tr>
+<td><code>ignore_patterns</code></td>
+<td>List of additional file names or globs to be ignored during processing</td>
+</tr>
+<tr>
+<td><code>keep_files</code></td>
+<td>List of explicit file names be kept, overriding any ignores</td>
+</tr>
+<tr>
+<td><code>strict_undefined</code></td>
+<td>Set the default behavior regarding undefined template variables</td>
+</tr>
 </tbody>
 </table>
 <p>Link objects, for the <code>reflinks</code> attribute, are a mapping with an <code>url</code> key that maps
-to the link url and a <code>title</code> key that maps to the link title. </p>
+to the link URL and a <code>title</code> key that maps to the link title.</p>
+<p>The <code>baseurl</code> option mirrors the same feature in <a href="http://jekyllrb.com/docs/configuration/#serve-command-options">Jekyll</a>.  It
+allows you to specify a prefix for all local URLs generated within your site.
+This is necessary when your site will be served from a URL that has more than
+just the hostname. For example, on GitHub Pages sites are served from
+http://username.github.io/project_name/, so Urubu needs to include that
+<code>/project_name/</code> in generated URLs pointing to local content.</p>
+<p><code>baseurl</code> should be specified with no beginning or trailing slashes, e.g.:</p>
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">baseurl</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">prefix</span>
+</pre></div>
+
+
 <p>The file extension attributes, <code>file_ext</code> and <code>link_ext</code>, are both usually set to the
 same value (i.e. <code>'.php'</code>), unless the target site has .htaccess rewrite rules that
 affect the file extensions.</p>
@@ -200,11 +212,22 @@ to <code>www.test.com/account.htm</code>. For this case, one would need to set <
 be set to <code>''</code>, so that the <code>a href</code> links are directed to the files without extension.</p>
 <p>Otherwise, <code>file_ext</code> and <code>link_ext</code> should be set to the same extension, specially
 during testing, so that the simple web server invoked by <code>urubu serve</code> works fine,
-as well as any web server that does not rewrite the file extensions of the requests. </p>
+as well as any web server that does not rewrite the file extensions of the requests.</p>
+<p>The <code>ignore_patterns</code> attribute specifies glob-style patterns to be ignored
+during processing, in addition to the default ones according to the
+<a href="/manual/structure.html#processing-rules" title="Project structure">Processing Rules</a>.</p>
+<p>In some cases you may explicitly want to keep certain files that would normally
+be ignored. For example, you may have hidden files like <code>.nojekyll</code> to prevent
+Jekyll processing, or <code>.htaccess</code> and <code>.htpasswd</code> for access control.  You can
+keep such files in the build using the <code>keep_files</code> attribute.</p>
+<p>The <code>strict_undefined</code> attribute controls whether the build should
+silently ignore undefined template variables or raise an error when they are
+encountered. If <code>false</code> or undefined, undefined template variables are treated
+as empty strings (<code>''</code>). If <code>true</code>, the build will stop and raise an error.</p>
 <p>You can define additional attributes that will be made available as
 site variables to the template engine. The following is an example of a
 <code>_site.yml</code> file:</p>
-<div class="codehilite"><pre>brand: Urubu 
+<div class="codehilite"><pre><span></span>brand: Urubu
 
 reflinks:
     content_license:
@@ -214,7 +237,7 @@ reflinks:
         url: http://www.gnu.org/licenses/agpl-3.0.txt
         title: GNU Affero General Public License
     markdown:
-        url: http://daringfireball.net/projects/markdown/  
+        url: http://daringfireball.net/projects/markdown/
         title: Markdown
 
 file_ext: &#39;.htm&#39;  # Change default file extension (&#39;.html&#39;)
@@ -223,11 +246,11 @@ link_ext: &#39;.htm&#39;  # Change default link extension (&#39;.html&#39;)
 
 
 <h3 id="_layouts"><code>_layouts</code></h3>
-<p>This directory contains the templates that define the available layouts.
+<p>This directory contains the available layouts.
 They are used by the Jinja2 template engine to render html pages.
-The templates files should have the <code>.html</code> extension.</p>
+The layout files should have the <code>.html</code> extension.</p>
 <h3 id="_python"><code>_python</code></h3>
-<p>This directory contains Python hooks for the template engine. </p>
+<p>This directory contains Python hooks for the template engine.</p>
 <h2 id="project-wide-reference-ids">Project-wide reference ids</h2>
 <p>Urubu has the concept of project-wide reference ids.  You can use them to refer
 to link objects in your content and configuration.  Their definition comes
@@ -239,16 +262,16 @@ configuration file, as discussed earlier.</li>
 </ul>
 <p>Project-wide references ids live in a single namespace. For pages and folders,
 the id is a root-relative pathname starting with a slash <code>/</code> and without file
-extension. By convention, global reference ids should not start with a <code>/</code>.   </p>
+extension. By convention, global reference ids should not start with a <code>/</code>.</p>
 <p>In your content and configuration info, you can also use relative reference
 ids. Urubu will resolve them depending on the file location in the project. In
 case of a name clash with a global reference id, you will have to disambiguate
-by adding pathname components. </p>
+by adding pathname components.</p>
 <p>In accordance with Markdown conventions, reference ids are case-insensitive.</p>
 <h2 id="content-files">Content files</h2>
 <p>Content files are Markdown files with extension <code>.md</code>. They should start with
 YAML front matter that defines a number of attributes, as in the following example:</p>
-<div class="codehilite"><pre>---
+<div class="codehilite"><pre><span></span>---
 title: Read me first
 layout: page
 date: 2014-01-15
@@ -272,7 +295,7 @@ date: 2014-01-15
 </tr>
 <tr>
 <td><code>layout</code></td>
-<td>Specifies the desired layout, without the <code>.html</code> extension. Mandatory.</td>
+<td>Specifies the layout, without the <code>.html</code> extension, or <code>null</code>. Mandatory.</td>
 </tr>
 <tr>
 <td><code>date</code></td>
@@ -280,26 +303,33 @@ date: 2014-01-15
 </tr>
 <tr>
 <td><code>tags</code></td>
-<td>Reserved for future use.</td>
+<td>A tag or list of tags for the content.</td>
+</tr>
+<tr>
+<td><code>saveas</code></td>
+<td>Allows overriding of the output filename.</td>
 </tr>
 </tbody>
 </table>
-<p>In addition, you can add arbitrary user-defined attributes. All attributes 
+<p>The <code>layout</code> attribute is mandatory, but can be given a <code>null</code> value.
+This is useful when the page content is used by other pages, but
+no html output is required for the page itself.</p>
+<p>In addition, you can add arbitrary user-defined attributes. All attributes
 are made available as page object attributes to the template engine.</p>
 <h2 id="markdown-in-attributes">Markdown in attributes</h2>
 <p>Optionally, you can use markdown format in front matter attributes.  Markdown
 processing is enabled by adding a <code>.md</code> suffix to the attribute. The resulting
-html code will be stored in a synthesized attribute without the <code>.md</code> suffix.  </p>
+html code will be stored in a synthesized attribute without the <code>.md</code> suffix.</p>
 <p>For example:</p>
-<div class="codehilite"><pre>---
-title:  
+<div class="codehilite"><pre><span></span>---
+title:
 layout: page
 summary.md: |
     A summary of the page items as a list:
 
     * item 1
     * item 2
-    * item 3 
+    * item 3
 ---
 </pre></div>
 
@@ -310,7 +340,7 @@ code.</p>
 <p>Index files with basename <code>index.md</code> are a special kind of content files.  They
 are used to specify the attributes and the content of a directory. There are
 two options to specify the content, explicitly with the <code>content</code> attribute or
-implicitly using the <code>order</code> attribute.  </p>
+implicitly using the <code>order</code> attribute.</p>
 <table class="table">
 <thead>
 <tr>
@@ -334,29 +364,64 @@ implicitly using the <code>order</code> attribute.  </p>
 </tbody>
 </table>
 <p><code>content</code> and <code>order</code> are mutually exclusive; you should use one of the two options.</p>
-<p>A local link object is a mapping with a <code>url</code> key to an url, and a <code>title</code> key
-to a title.  Alternatively, you can start from an existing reference id
-using a <code>ref</code> key, and overwrite its title.  </p>
+<p>A local link object is a mapping with either a <code>url</code> key to an url, or a <code>ref</code>
+key to a reference id as mandatory items. In addtion, you can specify a title
+with a <code>title</code> key.</p>
 <p>The ordering attribute can be predefined or user-defined, but it should be
 specified in each content file in the directory.  As an example, you can
 specify that the content of a directory should be ordered as blog by the
-following front matter in the index file: </p>
-<div class="codehilite"><pre>---
+following front matter in the index file:</p>
+<div class="codehilite"><pre><span></span>---
 title: Blog
 layout: blog_index
 order: date
 reverse: true
 ---
 </pre></div>
-      </div>
+
+
+<h2 id="tag-directory">Tag directory</h2>
+<p>The optional top-level directory called <code>tag</code> has a predefined meaning.  Urubu
+uses the corresponding folder in the build to hold the tag-related content view
+that it generates automatically. You can use the index file to set attributes
+such as the <code>layout</code>. However, the content will be generated by Urubu
+automatically and needs not be set.</p>
+    </main>
+    <ul class="pager">
+      <li class="previous"><a href="/manual/install.html">&larr; Installation</a></li>
+      <li class="next"><a href="/manual/authoring.html">Authoring &rarr;</a></li>
+    </ul>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Project structure</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#the-project-directory">The project directory</a></li>
+<li><a href="#processing-rules">Processing rules</a></li>
+<li><a href="#special-files-and-directories">Special files and directories</a><ul>
+<li><a href="#_siteyml">_site.yml</a></li>
+<li><a href="#_layouts">_layouts</a></li>
+<li><a href="#_python">_python</a></li>
+</ul>
+</li>
+<li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
+<li><a href="#content-files">Content files</a></li>
+<li><a href="#markdown-in-attributes">Markdown in attributes</a></li>
+<li><a href="#index-files">Index files</a></li>
+<li><a href="#tag-directory">Tag directory</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
     </div>
 
   </div>
-    
-  <ul class="pager">
-    <li class="previous"><a href="/manual/intro.html">&larr; Concepts</a></li>
-    <li class="next"><a href="/manual/authoring.html">Authoring &rarr;</a></li>
-  </ul>
 
     <div class="footer">
         <div style="margin: 5px">
@@ -386,13 +451,15 @@ window.__gcfg = {
     </div>
 
 
-</div> 
+</div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

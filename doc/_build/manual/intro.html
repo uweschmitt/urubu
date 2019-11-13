@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- customizations -->
     <link href="/css/site.css" rel="stylesheet" media="screen">
+    <!-- pygments -->
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
+    <!-- icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,6 +30,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -43,27 +49,25 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
- 
-            <li><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li><a href="/start.html">Overview</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/support.html">Support</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+                <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/more/" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>    
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>    
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>    
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+                <li><a href="https://github.com/jandecaluwe/urubu">GitHub repository</a></li>
+                <li><a href="/more/sites.html">Websites powered by Urubu</a></li>
+                <li><a href="/more/about.html">About this site</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -80,41 +84,18 @@
   </ol>
 
   <div class="page-header">
- 
     <h1>Concepts</h1>
   </div>
 
   <div class="row">
 
-    <div class="col-md-3" role="navigation"> 
- 
-      <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
-        <div class="well">
-          <a href="#"><strong>Concepts</strong></a>
-          <div class="toc">
-<ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#authoring">Authoring</a></li>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#templating">Templating</a></li>
-<li><a href="#theming">Theming</a></li>
-<li><a href="#navigation">Navigation</a></li>
-<li><a href="#project-wide-reference-links">Project-wide reference links</a></li>
-<li><a href="#development-and-deployment">Development and deployment</a></li>
-</ul>
-</div>
-
-        </div>
-      </div>
-    </div>
- 
-    <div class="content">
-      <div class="col-md-6" role="main">
-        <h2 id="introduction">Introduction</h2>
+    <div class="col-md-6 content" role="main">
+    <main>
+      <h2 id="introduction">Introduction</h2>
 <p>Welcome to Urubu! My name is Jan Decaluwe and I am Urubu's author.</p>
 <p>Urubu is a micro <abbr title="Content Management System">CMS</abbr> for static websites.  The qualification "micro* means that
 it has a small feature set, defined by what I need for my purposes.  To know
-whether it is the right tool for you, check out <a href="/start.html" title="Read me first">Read me first</a>. </p>
+whether it is the right tool for you, check out <a href="/start.html" title="Overview">Overview</a>. </p>
 <p>Urubu's design philosophy is radical reuse of great software and ideas from
 others. In the following sections, I will describe its concepts and how
 they are implemented.</p>
@@ -188,21 +169,23 @@ but never leaves the viewport. (Note: this description assumes that the
 viewport is wide enough to accomodate the sidebar.) At any time, the full
 structure of the page remains visible and available for navigation. This was
 implemented by borrowing code from the <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a> theme.</p>
-<h2 id="project-wide-reference-links">Project-wide reference links</h2>
-<p>A reference link is a way to refer to a link object via a reference id. Urubu
-supports the concept of project-wide reference links.  Global reference links
-are defined in the site configuration file.  Moreover, all content pages and
-folders are available as reference links.</p>
-<p>When you use a reference id in configuration info or in Markdown content
-(between square brackets) Urubu will automatically resolve it. For Markdown,
-this feature is implemented as a Markdown extension. Note that it doesn't
-require any syntax change. It enables page linking similar to what is commonly
-found on wiki's. </p>
-<p>Project-wide reference links are a distinguishing Urubu feature.</p>
+<h2 id="project-wide-reference-ids">Project-wide reference ids</h2>
+<p>Markdown defines the concept of a reference link. This is a way to refer to a
+page or an url using a reference id.  The syntax of a reference link is a
+reference id between square brackets, for example <code>[intro]</code>. </p>
+<p>Urubu supports the concept of project-wide reference ids.  First, global
+reference ids can be defined in the site configuration file.  Moreover, all
+content pages and folders have a corresponding reference id: their pathname
+without extension. In this case, reference links are similar to wiki links, the
+typical way to link between pages in wiki's.</p>
+<p>Standard Markdown only resolves reference ids that are defined within the file.
+Urubu extends this behavior by resolving them over the project.  This feature
+is implemented as a Markdown extension. Note that it doesn't require new syntax.</p>
+<p>Project-wide reference ids are a unique Urubu feature.</p>
 <p>One of the messages of Steve Krug's book is that the text that you click should
 be the title of the page where you land. Therefore, when you use reference
-links, Urubu will insert the title of the link in the generated html (unless
-you specify an alternative text explicitly).</p>
+links, Urubu will insert the page title in the generated html (unless you
+specify an alternative text explicitly).</p>
 <h2 id="development-and-deployment">Development and deployment</h2>
 <p>You can develop a Urubu project is like a software project, from a git or
 mercurial repository.  This gives you best-in-class revision control.
@@ -210,14 +193,36 @@ Moreover, all the workflows that these systems provide are available. For
 example, you can develop your website collaboratively on <a href="http://www.github.com" title="GitHub">GitHub</a> or
 <a href="http://www.bitbucket.com" title="Bitbucket">Bitbucket</a>.  Finally, it is easy to automate deployment, triggered by a push
 of the generated site to an upstream repository. </p>
-      </div>
+    </main>
+    <ul class="pager">
+      <li class="next"><a href="/manual/install.html">Installation &rarr;</a></li>
+    </ul>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Concepts</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#authoring">Authoring</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#templating">Templating</a></li>
+<li><a href="#theming">Theming</a></li>
+<li><a href="#navigation">Navigation</a></li>
+<li><a href="#project-wide-reference-ids">Project-wide reference ids</a></li>
+<li><a href="#development-and-deployment">Development and deployment</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
     </div>
 
   </div>
-    
-  <ul class="pager">
-    <li class="next"><a href="/manual/structure.html">Project structure &rarr;</a></li>
-  </ul>
 
     <div class="footer">
         <div style="margin: 5px">
@@ -247,13 +252,15 @@ window.__gcfg = {
     </div>
 
 
-</div> 
+</div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

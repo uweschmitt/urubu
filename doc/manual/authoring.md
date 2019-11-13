@@ -19,11 +19,11 @@ standard, as well as a few others.
 The most notable supported extensions are:
 
 * [tables]
+* [attr_list]
 * [abbrev]
 * [def_list]
 * [fenced_code] 
 * [code_hilite]
-* [markdown_checklist]
 
 Code
 ====
@@ -43,11 +43,7 @@ To properly render the highlighted code, you will need to add a `syntax.css`
 stylesheet. A good solution is to use the [syntax stylesheet from
 GitHub][syntax_github].
 
-
-
-
 [syntax_github]: https://github.com/mojombo/tpw/blob/master/css/syntax.css
-
 
 Reference links
 ===============
@@ -62,13 +58,20 @@ further on define it as follows:
 
 This is nice for readability, but it all remains file based.
 
-Urubu extends this behavior by automatically resolving project-wide
-reference links. (See the chapter about [structure]).
+Urubu extends this behavior by automatically resolving [structure#Project-wide
+reference ids].  This feature is implemented as a Markdown extension. Note that
+it doesn't require a syntax change. It enables page linking like in wikis.
 
-This feature is implemented as a Markdown extension. Note that it doesn't
-require a syntax change. It enables page linking similar to what is commonly
-found on wikis.
+In addition, you can add a fragment, like `#some-anchor`, to the reference id.
+This represents a link to an anchor within a page.  Since Urubu automatically
+adds slugified anchors to markdown headers, you can use those as targets.  For
+instance, `[authoring#reference-links]` is a link to the current
+[authoring#Reference links] section.  You can also define your own anchors
+using [attr_list]. 
 
-When you using reference links, Urubu will insert the title of the link in the
-generated html (unless you specify an alternative text explicitly).  In this
-way, the text that you click will match the title of the page where you land.
+Markdown supports reference links without a text.  In that case, Urubu inserts
+an appropriate text in the html.  For a reference link with no fragment, the
+title of the page is inserted.  For a reference link with a fragment, the
+fragment text is inserted. To make the result more readable, you can use
+non-slugified fragment text.  For example, `[authoring#Reference links]` also
+links to the present section, and is rendered as [authoring#Reference links]. 

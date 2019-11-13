@@ -1,4 +1,4 @@
-# Copyright 2014 Jan Decaluwe
+# Copyright 2014-2015 Jan Decaluwe
 #
 # This file is part of Urubu.
 #
@@ -19,18 +19,41 @@
 from __future__ import unicode_literals
 from io import open
 
-from warnings import warn
 import posixpath
 
 import markdown
+import logging
+logging.captureWarnings(False)
+
 from markdown import Extension
+from markdown.extensions import toc 
 from markdown.treeprocessors import Treeprocessor
 from markdown.inlinepatterns import ReferencePattern, REFERENCE_RE, SHORT_REF_RE
+from markdown.inlinepatterns import SimpleTagPattern, SMART_EMPHASIS_RE
 
-from urubu import UrubuWarning, UrubuError
+from urubu import UrubuWarning, urubu_warn, UrubuError, _warning, _error
 
-undef_ref_warning = "Undefined ref [{}] in file '{}'"
-ambig_ref_error = "Ambiguous ref [{}] in file '{}'"
+
+def _set_dl_class(tree):
+    for item in tree:
+        if item.tag == 'dl':
+            item.set('class', 'dl-horizontal')
+        _set_dl_class(item)
+
+
+class DLClass(Treeprocessor):
+
+    def run(self, root):
+        _set_dl_class(root)
+        return None
+
+
+class DLClassExtension(Extension):
+
+    """Add 'dl-horizontal' class to definition list elements (for bootstrap)."""
+
+    def extendMarkdown(self, md, md_globals):
+        md.treeprocessors.add('dlclass', DLClass(md), "_end")
 
 
 def _set_table_class(tree):
@@ -39,61 +62,120 @@ def _set_table_class(tree):
             item.set('class', 'table')
         _set_table_class(item)
 
+
 class TableClass(Treeprocessor):
 
     def run(self, root):
         _set_table_class(root)
         return None
 
+
 class TableClassExtension(Extension):
+
     """Add 'table' class to table elements (for bootstrap)."""
+
     def extendMarkdown(self, md, md_globals):
         md.treeprocessors.add('tableclass', TableClass(md), "_end")
+
 
 class ProjectReferencePattern(ReferencePattern):
 
     def handleMatch(self, m):
         try:
-            ref = m.group(9).lower()
+            ref = m.group(9)
         except IndexError:
             ref = None
         shortref = False
         if not ref:
             # if we got something like "[Google][]" or "[Google]"
             # we'll use "google" as the id
-            ref = m.group(2).lower()
+            ref = m.group(2)
             shortref = True
 
-        text = m.group(2)
-        # Clean up linebreaks in ref 
+        # Clean up linebreaks in ref
         ref = self.NEWLINE_CLEANUP_RE.sub(' ', ref)
-        if ref in self.markdown.references:
-            href, title = self.markdown.references[ref]
-        else: 
+
+        text = m.group(2)
+        id = ref.lower()
+
+        if id in self.markdown.references:
+            href, title = self.markdown.references[id]
+        else:
+            anchor = None
+            if '#' in ref:
+                ref, anchor = ref.split('#', 1)
             this = self.markdown.this
             if not posixpath.isabs(ref):
-                rootrelpath = '/' +  '/'.join(this['components'][:-1])
+                # treat empty ref as reference to current page
+                if not ref: 
+                    ref = this['components'][-1]
+                rootrelpath = '/' + '/'.join(this['components'][:-1])
                 id = posixpath.normpath(posixpath.join(rootrelpath, ref))
                 id = id.lower()
             else:
-                id = ref
+                id = ref.lower()
+            ref = ref.lower()
             if ref in self.markdown.site['reflinks']:
                 if (ref != id) and (id in self.markdown.site['reflinks']):
-                    raise UrubuError(ambig_ref_error.format(ref, this['fn']))  
-                id = ref 
+                    raise UrubuError(_error.ambig_ref_md, msg=ref, fn=this['fn'])
+                id = ref
             if id in self.markdown.site['reflinks']:
                 item = self.markdown.site['reflinks'][id]
-                href, title = item['url'], item['title'] 
+                href, title = item['url'], item['title']
                 if shortref:
                     text = title
-            else: # ignore undefined refs
-                warn(undef_ref_warning.format(ref, this['fn']), UrubuWarning)
+                    if anchor is not None:
+                        text = anchor
+                if anchor is not None:
+                    anchor = toc.slugify(anchor, '-')
+                    href = '%s#%s' % (href, anchor)
+                    anchorref = '%s#%s' % (id, anchor)
+                    self.markdown.this['_anchorrefs'].add(anchorref)
+            else:  # ignore undefined refs
+                urubu_warn(_warning.undef_ref_md, msg=ref, fn=this['fn'])
                 return None
 
         return self.makeTag(href, title, text)
 
+
 class ProjectReferenceExtension(Extension):
+
     """Overwrite reference pattern with project reference extension."""
+
     def extendMarkdown(self, md, md_globals):
-        md.inlinePatterns['reference'] = ProjectReferencePattern(REFERENCE_RE, md)
-        md.inlinePatterns['short_reference'] = ProjectReferencePattern(SHORT_REF_RE, md)
+        md.inlinePatterns['reference'] = ProjectReferencePattern(
+            REFERENCE_RE, md)
+        md.inlinePatterns['short_reference'] = ProjectReferencePattern(
+            SHORT_REF_RE, md)
+
+
+class ExtractAnchorsClass(Treeprocessor):
+
+    def run(self, tree):
+        this = self.markdown.this
+        thisid = this['id']
+        components = this['components']
+        for item in tree:
+            if 'id' in item.attrib:
+                self.markdown.anchors.add("%s#%s" % (thisid, item.attrib['id']))
+                # add special version for index files
+                if components[-1] == 'index':
+                    navid = thisid[:-6] # remove trailing backslash also
+                    self.markdown.anchors.add("%s#%s" % (navid, item.attrib['id']))
+        return None
+
+
+class ExtractAnchorsExtension(Extension):
+
+    def extendMarkdown(self, md, md_globals):
+        md.treeprocessors.add('extractanchors', ExtractAnchorsClass(md), "_end")
+
+
+# extension for the <mark> tag
+class MarkTagExtension(Extension):
+    def extendMarkdown(self, md, md_globals):
+        # emphasis2 is the one with underscores, use the smart version
+        md.inlinePatterns['emphasis2'] = SimpleTagPattern(SMART_EMPHASIS_RE, 'mark')
+
+
+

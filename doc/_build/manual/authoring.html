@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <!-- Bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- customizations -->
     <link href="/css/site.css" rel="stylesheet" media="screen">
+    <!-- pygments -->
     <link href="/css/syntax.css" rel="stylesheet" media="screen">
+    <!-- icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,6 +30,7 @@
   ga('send', 'pageview');
 
 </script>
+ 
   </head>
 
   <body>
@@ -43,27 +49,25 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-left">
- 
-            <li><a href="/start.html">Read me first</a></li>
-            <li><a href="/install.html">Installation</a></li>
+            <li><a href="/start.html">Overview</a></li>
             <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
             <li><a href="/faq/">FAQ</a></li>
-            <li><a href="/support.html">Support</a></li>
           </ul>
-
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+                <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="/sites/" class="dropdown-toggle" data-toggle="dropdown">Urubu sites <b class="caret"></b></a>
+              <a href="/more/" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://urubu-quickstart.jandecaluwe.com">Urubu Quickstart</a></li>    
-                <li><a href="http://www.myhdl.org">MyHDL</a></li>    
-                <li><a href="http://dev.myhdl.org">MyHDL development</a></li>    
-                <li><a href="http://www.jandecaluwe.com">Jan Decaluwe</a></li>    
-                <li><a href="http://music.jandecaluwe.com">Jan Decaluwe / Music</a></li>    
-                <li><a href="http://urubu.jandecaluwe.com">This site (Urubu documentation)</a></li>    
+                <li><a href="https://github.com/jandecaluwe/urubu">GitHub repository</a></li>
+                <li><a href="/more/sites.html">Websites powered by Urubu</a></li>
+                <li><a href="/more/about.html">About this site</a></li>
               </ul>
             </li>
-            <li><a href="/about.html">About</a></li>
           </ul>
 
         </div><!--/.nav-collapse -->
@@ -80,32 +84,14 @@
   </ol>
 
   <div class="page-header">
- 
     <h1>Authoring</h1>
   </div>
 
   <div class="row">
 
-    <div class="col-md-3" role="navigation"> 
- 
-      <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
-        <div class="well">
-          <a href="#"><strong>Authoring</strong></a>
-          <div class="toc">
-<ul>
-<li><a href="#content">Content</a></li>
-<li><a href="#code">Code</a></li>
-<li><a href="#reference-links">Reference links</a></li>
-</ul>
-</div>
-
-        </div>
-      </div>
-    </div>
- 
-    <div class="content">
-      <div class="col-md-6" role="main">
-        <h2 id="content">Content</h2>
+    <div class="col-md-6 content" role="main">
+    <main>
+      <h2 id="content">Content</h2>
 <p>In Urubu, content is entered in <a href="http://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a> format. This is a lightweight format
 that feels like a natural way to write content in plain text.</p>
 <p>Stock markdown has a small feature set. For example, it does not even
@@ -115,11 +101,11 @@ standard, as well as a few others.</p>
 <p>The most notable supported extensions are:</p>
 <ul>
 <li><a href="http://pythonhosted.org/Markdown/extensions/tables.html" title="Tables">Tables</a></li>
+<li><a href="http://pythonhosted.org/Markdown/extensions/attr_list.html" title="Attribute lists">Attribute lists</a></li>
 <li><a href="http://pythonhosted.org/Markdown/extensions/abbreviations.html" title="Abbrevations">Abbrevations</a></li>
 <li><a href="http://pythonhosted.org/Markdown/extensions/definition_lists.html" title="Definition Lists">Definition Lists</a></li>
 <li><a href="http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html" title="Fenced Code Blocks">Fenced Code Blocks</a> </li>
 <li><a href="http://pythonhosted.org/Markdown/extensions/code_hilite.html" title="CodeHilite">CodeHilite</a></li>
-<li><a href="https://github.com/FND/markdown-checklist" title="GitHub style Task Lists">GitHub style Task Lists</a></li>
 </ul>
 <h2 id="code">Code</h2>
 <p>Urubu intents to offer good support for software projects. Therefore, it
@@ -137,28 +123,51 @@ GitHub</a>.</p>
 <p>Stock Markdown supports "reference links" that are resolved by defining them
 later in the file. For example, you can use <code>[urubu]</code> in your content and
 further on define it as follows:</p>
-<div class="codehilite"><pre>[urubu]: http://urubu.jandecaluwe.com
+<div class="codehilite"><pre><span></span>[urubu]: http://urubu.jandecaluwe.com
 </pre></div>
 
 
 <p>This is nice for readability, but it all remains file based.</p>
-<p>Urubu extends this behavior by automatically resolving project-wide
-reference links. (See the chapter about <a href="/manual/structure.html" title="Project structure">Project structure</a>).</p>
-<p>This feature is implemented as a Markdown extension. Note that it doesn't
-require a syntax change. It enables page linking similar to what is commonly
-found on wikis.</p>
-<p>When you using reference links, Urubu will insert the title of the link in the
-generated html (unless you specify an alternative text explicitly).  In this
-way, the text that you click will match the title of the page where you land.</p>
-      </div>
+<p>Urubu extends this behavior by automatically resolving <a href="/manual/structure.html#project-wide-reference-ids" title="Project structure">Project-wide reference ids</a>.  This feature is implemented as a Markdown extension. Note that
+it doesn't require a syntax change. It enables page linking like in wikis.</p>
+<p>In addition, you can add a fragment, like <code>#some-anchor</code>, to the reference id.
+This represents a link to an anchor within a page.  Since Urubu automatically
+adds slugified anchors to markdown headers, you can use those as targets.  For
+instance, <code>[authoring#reference-links]</code> is a link to the current
+<a href="/manual/authoring.html#reference-links" title="Authoring">Reference links</a> section.  You can also define your own anchors
+using <a href="http://pythonhosted.org/Markdown/extensions/attr_list.html" title="Attribute lists">Attribute lists</a>. </p>
+<p>Markdown supports reference links without a text.  In that case, Urubu inserts
+an appropriate text in the html.  For a reference link with no fragment, the
+title of the page is inserted.  For a reference link with a fragment, the
+fragment text is inserted. To make the result more readable, you can use
+non-slugified fragment text.  For example, <code>[authoring#Reference links]</code> also
+links to the present section, and is rendered as <a href="/manual/authoring.html#reference-links" title="Authoring">Reference links</a>. </p>
+    </main>
+    <ul class="pager">
+      <li class="previous"><a href="/manual/structure.html">&larr; Project structure</a></li>
+      <li class="next"><a href="/manual/building.html">Project building &rarr;</a></li>
+    </ul>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Authoring</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#content">Content</a></li>
+<li><a href="#code">Code</a></li>
+<li><a href="#reference-links">Reference links</a></li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
     </div>
 
   </div>
-    
-  <ul class="pager">
-    <li class="previous"><a href="/manual/structure.html">&larr; Project structure</a></li>
-    <li class="next"><a href="/manual/building.html">Project building &rarr;</a></li>
-  </ul>
 
     <div class="footer">
         <div style="margin: 5px">
@@ -188,13 +197,15 @@ window.__gcfg = {
     </div>
 
 
-</div> 
+</div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
 
   </body>
 </html>

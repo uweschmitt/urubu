@@ -2,11 +2,14 @@ brand: Urubu
 
 bootswatch: null 
 navbar_inverse: false 
-bootstrap: 3.1.1
+navbar_right_items: 1
+bootstrap: 3.3.4
+
+keep_files: [ .nojekyll ]
 
 reflinks:
     jandecaluwe:
-        url: ttp://www.jandecaluwe.com
+        url: http://www.jandecaluwe.com
         title: Jan Decaluwe
     myhdl_site: 
         url: http://www.myhdl.org 
@@ -59,7 +62,7 @@ reflinks:
     virtualenv:
         url: http://www.virtualenv.org/en/latest/virtualenv.html
         title: virtualenv
-    urubu_repo:
+    urubu-repo:
         url: https://github.com/jandecaluwe/urubu
         title: Urubu repo
     tables: 
@@ -68,6 +71,9 @@ reflinks:
     abbrev: 
         url: http://pythonhosted.org/Markdown/extensions/abbreviations.html
         title: Abbrevations
+    attr_list:
+        url: http://pythonhosted.org/Markdown/extensions/attr_list.html
+        title: Attribute lists
     def_list: 
         url: http://pythonhosted.org/Markdown/extensions/definition_lists.html
         title: Definition Lists
@@ -83,3 +89,9 @@ reflinks:
     urubu-quickstart:
         url: http://urubu-quickstart.jandecaluwe.com
         title: Urubu Quickstart
+    urubu:
+        url: http://urubu.jandecaluwe.com
+        title: Urubu Documentation 
+    font-awesome:
+        url: http://fortawesome.github.io/Font-Awesome
+        title: Font Awesome

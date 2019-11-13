@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Templating constructs in pages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!-- customizations -->
+    <link href="/css/site.css" rel="stylesheet" media="screen">
+    <!-- pygments -->
+    <link href="/css/syntax.css" rel="stylesheet" media="screen">
+    <!-- icons -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48968311-3', 'jandecaluwe.com');
+  ga('send', 'pageview');
+
+</script>
+ 
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Urubu</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/start.html">Overview</a></li>
+            <li class="active"><a href="/manual/">Manual</a></li>
+            <li><a href="http://urubu-quickstart.jandecaluwe.com">Quickstart</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+          </ul>
+          <form class="navbar-form navbar-left" action="/search.html" role="search">
+            <div class="form-group">
+                <input type="text" required name="q" id="tipue_search_input" class="form-control" placeholder="Search"> 
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="/more/" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="https://github.com/jandecaluwe/urubu">GitHub repository</a></li>
+                <li><a href="/more/sites.html">Websites powered by Urubu</a></li>
+                <li><a href="/more/about.html">About this site</a></li>
+              </ul>
+            </li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+      <li><a href="/manual/">Manual</a></li>
+      <li class="active">Templating constructs in pages</li>
+  </ol>
+
+  <div class="page-header">
+    <h1>Templating constructs in pages</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 content" role="main">
+    <main>
+      <h2 id="overview">Overview</h2>
+<p>Writing in Markdown is great, but sometimes you run into limitations. For those
+cases, Urubu supports a feature gratefully borrowed from <a href="http://jekyllrb.com" title="Jekyll">Jekyll</a>: using
+templating constructs in content pages.</p>
+<p>Basically, all content pages are processed by the templating engine before
+going to the Markdown processor. The full power of <a href="http://jinja.pocoo.org" title="Jinja2">Jinja2</a> is thus available
+in your content pages. </p>
+<p>The usage of templating constructs in content pages is best explained with
+examples. Therefore, we will start with some examples, and review the concepts
+afterwards.</p>
+<h2 id="example-usage">Example usage</h2>
+<h3 id="task-list-icons">Task list icons</h3>
+<p>Suppose you want to emulate <a href="http://www.github.com" title="GitHub">GitHub</a> style task lists, as follows:</p>
+<ul>
+<li><i class="fa fa-square-o"></i> Task 1</li>
+<li><i class="fa fa-check-square-o"></i> Task 2</li>
+<li><i class="fa fa-square-o"></i> Task 1</li>
+</ul>
+<p>An icon is used to show whether a task is still open or not. </p>
+<p>We can support this by defining well-named reusable variables in a dedicated
+template file, as follows:</p>
+<div class="codehilite"><pre><span></span>{% set open = &#39;&lt;i class=&quot;fa fa-square-o&quot;&gt;&lt;/i&gt;&#39; %}
+{% set done = &#39;&lt;i class=&quot;fa fa-check-square-o&quot;&gt;&lt;/i&gt;&#39; %}
+</pre></div>
+
+
+<p>Variables <code>open</code> and <code>done</code> now hold HTML code that refers to icons. In these
+examples, I use the <a href="http://fortawesome.github.io/Font-Awesome" title="Font Awesome">Font Awesome</a> icon  library. You will need to add the
+appropriate reference to the icon stylesheet in your base template. </p>
+<p>Suppose these variables are defined in the file <code>_layouts/util.html</code>. We can
+import them in any content page as follows:</p>
+<div class="codehilite"><pre><span></span>{% from &#39;util.html&#39; import open, done %}
+</pre></div>
+
+
+<p>Note that Urubu knows to look up <code>util.html</code> in the <code>_layouts/</code> directory,
+because that is where templates should be located. </p>
+<p>Within the content page, we can use the variables as follows, to get the result
+as above:</p>
+<div class="codehilite"><pre><span></span>* {{ open }} Task 1
+* {{ done }} Task 2
+* {{ open }} Task 1
+</pre></div>
+
+
+<h3 id="general-icon-interface">General icon interface</h3>
+<p>Suppose you want a more general interface to icons, so that you can easily
+refer to any icon by name. This can be done with a Jinja2 macro. A macro is
+like a function that can take parameters:</p>
+<div class="codehilite"><pre><span></span>{% macro fa(name, class=&#39;&#39;) %}
+&lt;i class=&quot;fa fa-{{name}} {{class}}&quot;&gt;&lt;/i&gt;
+{% endmacro %}
+</pre></div>
+
+
+<p>Again, we can import the macro <code>fa</code> in content pages:</p>
+<div class="codehilite"><pre><span></span>{% from &#39;util.html&#39; import fa %}
+</pre></div>
+
+
+<p>Then we can use it as follows, for example to refer to the Github icon:</p>
+<div class="codehilite"><pre><span></span>{{ fa(&#39;github&#39;) }}
+</pre></div>
+
+
+<p>This gives the following result:</p>
+<p><i class="fa fa-github "></i></p>
+<p>We can pass additional CSS classes via the optional <code>class</code> parameter. The
+following example gets the alternative Github icon in twice the basic size:</p>
+<div class="codehilite"><pre><span></span>{{ fa(&#39;github-alt&#39;, &#39;fa-2x&#39;) }}
+</pre></div>
+
+
+<p>This gives the following result:</p>
+<p><i class="fa fa-github-alt fa-2x"></i></p>
+<h3 id="figure">Figure</h3>
+<p>Standard Markdown does not support the HTML5 <code>&lt;figure&gt;</code> tag, and the related
+<code>&lt;figcaption&gt;</code> tag to add captions. We can support this with the following
+macro:</p>
+<div class="codehilite"><pre><span></span>{% macro figure(fn, caption=&#39;&#39;) %}
+&lt;figure&gt;
+  &lt;img src=&quot;/img/{{fn}}&quot; class=&quot;img-responsive&quot; alt=&quot;{{caption}}&quot;&gt;
+  {% if caption %}
+  &lt;figcaption class=&quot;text-center&quot;&gt;{{caption}}&lt;/figcaption&gt;
+  {% endif %}
+&lt;/figure&gt;
+{% endmacro %}
+</pre></div>
+
+
+<p>This macro assumes that images will be placed in an <code>img/</code> directory. In
+addition, it makes the image responsive using a Bootstrap class, and centers
+the optional caption.  Again, we can use the macro by importing:</p>
+<div class="codehilite"><pre><span></span>{% from &#39;util.html&#39; import figure %}
+</pre></div>
+
+
+<p>This is an example usage:</p>
+<div class="codehilite"><pre><span></span>{{ figure(&#39;urubu.jpg&#39;, &quot;An Urubu - a brazilian vulture&quot;) }}
+</pre></div>
+
+
+<p>This gives the following result:</p>
+<figure>
+  <img src="/img/urubu.jpg" class="img-responsive" alt="An Urubu - a brazilian vulture">
+  <figcaption class="text-center">An Urubu - a brazilian vulture</figcaption>
+</figure>
+
+<h2 id="templating-concepts">Templating concepts</h2>
+<h3 id="template-processing-is-done-first">Template processing is done first</h3>
+<p>The examples illustrate how you can use template variables and macros to
+construct HTML code. However, it is important to understand that template
+processing is done first, before Markdown processing (for good reasons).  Thus,
+the HTML code from variables and macros first becomes part of Markdown source
+code.  This works well because Markdown is designed to handle HTML
+transparently.</p>
+<h3 id="full-template-power-available">Full template power available</h3>
+<p>The examples demonstrate the use of variables, macros, and imports.  This is
+merely the beginning: in fact, the full power of Jinja2 templates is available.
+This is a vast subject. To learn what is possible, see the <a href="http://jinja.pocoo.org/docs/dev/templates">Jinja2 Template
+Designer Documentation</a>.</p>
+<h3 id="context-variables">Context variables</h3>
+<p>When Urubu invokes template processing on a page, it automatically passes
+certain context variables.  This works exactly like for regular templates, as
+described in <a href="/manual/templates.html#context-variables" title="Templates">Context Variables</a>. Basically, variable <code>this</code>
+provides access to the page attributes, and variable <code>site</code> provides access to
+the global site attributes. </p>
+<h3 id="template-delimiters">Template delimiters</h3>
+<p>Template support introduces new delimiters as follows:</p>
+<ul>
+<li><code>{# ... #}</code> for comments not included in the output</li>
+<li><code>{{ ... }}</code> for expressions, to print to the output</li>
+<li><code>{% ... %}</code> for statements</li>
+</ul>
+<p>These delimiters deserve some attention.</p>
+<p>First, the comment delimiters are interesting because they add a functionality
+that is not available in Markdown: comments that will not show up in the
+output.</p>
+<p>Secondly, as always with delimiters, there is the problem of how to escape them
+if you want to use them literally in source code, without interpretation.</p>
+<p>For an inline literal or snippet you can use literal expressions.  For example,
+to get <code>{{</code> you can write  <code>{{ '{{' }}</code> .   </p>
+<p>For a larger section, you can mark a block <em>raw</em>. For example, to
+get the list shown earlier in this section, you can write:</p>
+<div class="codehilite"><pre><span></span>{% raw %}
+* `{# ... #}` for comments not included in the output
+* `{{ ... }}` for expressions, to print to the output
+* `{% ... %}` for statements
+{% endraw %}
+</pre></div>
+    </main>
+    <ul class="pager">
+      <li class="previous"><a href="/manual/templates.html">&larr; Templates</a></li>
+      <li class="next"><a href="/manual/hooks.html">Python hooks &rarr;</a></li>
+    </ul>
+    </div>
+
+    <div class="col-md-3" role="complementary">
+      <nav class="hidden-print hidden-xs hidden-sm">
+        <div class="sidebar" data-spy="affix" data-offset-top="80" data-offset-bottom="60">
+          <div class="well">
+            <a href="#"><strong>Templating constructs in pages</strong></a>
+            <div class="toc">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#example-usage">Example usage</a><ul>
+<li><a href="#task-list-icons">Task list icons</a></li>
+<li><a href="#general-icon-interface">General icon interface</a></li>
+<li><a href="#figure">Figure</a></li>
+</ul>
+</li>
+<li><a href="#templating-concepts">Templating concepts</a><ul>
+<li><a href="#template-processing-is-done-first">Template processing is done first</a></li>
+<li><a href="#full-template-power-available">Full template power available</a></li>
+<li><a href="#context-variables">Context variables</a></li>
+<li><a href="#template-delimiters">Template delimiters</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+
+    <div class="footer">
+        <div style="margin: 5px">
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="medium"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+window.__gcfg = {
+    lang: 'en-US'
+};
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>        </div>
+        <p> Content licensed under the
+           <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA License</a>.
+        </p> 
+        <p>Website powered by <a href="http://urubu.jandecaluwe.com">Urubu</a>.</p>
+    </div>
+
+
+</div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ 
+
+  </body>
+</html>
